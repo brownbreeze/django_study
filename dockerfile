@@ -1,0 +1,7 @@
+FROM centos:7.7.1908
+
+MAINTAINER      Dahye
+
+WORKDIR /home
+
+EXPOSE 8000
