@@ -120,3 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# STATIC_ROOT = '' # TODo
+
+# 파일 접근
+MEDIA_URL = '/media/'
+# 파일 저장
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
