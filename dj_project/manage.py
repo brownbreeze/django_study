@@ -13,3 +13,15 @@ if __name__ == '__main__':
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+
+'''
+#shell에서 django 소스내에 접근하듯이 쓰고 싶다면
+    >>> os.environ['DJANGO_SETTINGS_MODULE']
+    'dj_project.settings'
+    >>> import django
+    >>> django.setup()   
+    >>>
+    >>> from instagram.models import Post
+    >>> Post.objects.all()
+    <QuerySet [<Post: 첫번째 메시지>, <Post: 두번째 메시지>, <Post: 세번째 메시지>]>
+'''
