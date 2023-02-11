@@ -18,6 +18,12 @@ vi ~/.bashrc
     #
 source ~/.bashrc
 ```
+- django sqlite3 version
+```
+wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.10.2/1.fc22/x86_64/sqlite-3.10.2-1.fc22.x86_64.rpm
+wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.10.2/1.fc22/x86_64/sqlite-devel-3.10.2-1.fc22.x86_64.rpm
+yum -y install sqlite-3.10.2-1.fc22.x86_64.rpm sqlite-devel-3.10.2-1.fc22.x86_64.rpm
+```
 ```
 cd /home
 # git clone 해온 후 기동하기 
