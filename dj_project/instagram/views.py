@@ -12,5 +12,5 @@ def post_list(request):
     # instagram/templates/instagram/post_list.html 를 암시
     return render(request, 'instagram/post_list.html',{
         'post_list' : qs,
-
+        'q' : q,
     })
