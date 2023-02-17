@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third apps
     'django_extensions',
+    'debug_toolbar',
     # local apps 
     'blog1',
     'instagram'
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -131,3 +132,16 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # 파일 저장
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# local에서만 debug toolbar 띄우기 위함 
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    '0.0.0.0',
+    '172.17.0.2',
+    # ...
+]
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS += [".".join(ip.split(".")[:-1] + ["1"]) for ip in ips]
