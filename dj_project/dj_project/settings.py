@@ -144,3 +144,9 @@ INTERNAL_IPS = [
 import socket
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS += [".".join(ip.split(".")[:-1] + ["1"]) for ip in ips]
+
+# 프로젝트 만들자마자 보통 생성
+AUTH_USER_MODEL = 'auth.User'
+
+# Auto-created 오류 해결
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
