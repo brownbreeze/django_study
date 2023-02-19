@@ -11,6 +11,10 @@ class Post(models.Model):
     is_public = models.BooleanField(default=False, verbose_name='공개여부')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # Tag 가 상단에 노출이 안돼서 Tag 보다는 char 로 설정 가능
+    # blank = True : django 폼에서 유효성 검사 할 경우, post에 tag 가 없다고 실패할 것이다.  
+    # 보통 tag를 활용하는 쪽에서 ManytoMany를 설정하는 것을 선호할 수 있음 
+    tag_set = models.ManyToManyField('Tag', blank=True)
 
     # java의 toString
     def __str__(self):
@@ -36,3 +40,9 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    #post_set = models.ManyToManyField(Post)
+    def __str__(self):
+        return self.name
