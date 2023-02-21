@@ -1,11 +1,21 @@
-from django.urls import path, include, re_path
+from django.urls import path, include, re_path, register_converter
 from . import views
+
+class YearConverter:
+    regex = r"20\d{2}"
+
+    def to_python(self, value):
+        return int(value)
+
+    def to_url(self, value):
+        return str(value)
+
+
+register_converter(YearConverter, 'year')
 
 urlpatterns = [
     path('', views.post_list),
     path('<int:pk>/', views.post_detail),
     # path('archives/<int:year>/', views.archives_year),
-    # 특정 연도 또는 4자리 숫자만 허용하고 싶을 경우,
-    # ?P python re 작성법
-    re_path(r'archives/(?P<year>\d{4})/', views.archives_year),
+    re_path(r'archives/<year:year>/', views.archives_year),
 ]
