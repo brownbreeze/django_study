@@ -10,12 +10,13 @@ class YearConverter:
     def to_url(self, value):
         return str(value)
 
-
 register_converter(YearConverter, 'year')
 
+app_name = 'instagram' # URL Reverse 에서 namespace 역할 
+
 urlpatterns = [
-    path('', views.post_list),
+    path('', views.post_list, name='post_list'),
     path('<int:pk>/', views.post_detail),
     # path('archives/<int:year>/', views.archives_year),
-    re_path(r'archives/<year:year>/', views.archives_year),
+    path('archives/<year:year>/', views.archives_year),
 ]
