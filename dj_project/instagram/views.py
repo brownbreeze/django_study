@@ -21,12 +21,10 @@ def post_list(request):
     })
 
 def post_detail(request: HttpRequest, pk: int) -> HttpResponse: 
-    #eturn render(request, 'instagram/post_list.html')
-    # request.method, META, GET, POST, FILES, body
-    response = HttpResponse()
-    response.write("hello world")
-    response.write("hello world")
-    return response
-
+    post = Post.objects.get(pk=pk)
+    return render(request, 'instagram/post_detail.html',{
+        'post':post,
+    })
+    
 def archives_year(request, year):
     return HttpResponse(f"{year}년")
