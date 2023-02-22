@@ -1,7 +1,7 @@
 # from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post
-from django.http import HttpResponse, HttpRequest, Http404
+from django.http import HttpResponse, HttpRequest#, Http404
 
 # view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
 # post_list = ListView.as_view(model=Post)
@@ -21,10 +21,7 @@ def post_list(request):
     })
 
 def post_detail(request: HttpRequest, pk: int) -> HttpResponse: 
-    try:    
-        post = Post.objects.get(pk=pk) #DoesNotExist 예외 
-    except Post.DoesNotExist:
-        raise Http404
+    post = get_object_or_404(Post, pk=pk)
     return render(request, 'instagram/post_detail.html',{
         'post':post,
     })
