@@ -20,8 +20,10 @@ from django.urls import path, include
 #from dj_project import settings
 
 from django.conf import settings
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='root.html'), name='root'),
     path('admin/', admin.site.urls), # URL Reverse
     path('accounts/', include('accounts.urls')),
     path('blog1/', include('blog1.urls')),

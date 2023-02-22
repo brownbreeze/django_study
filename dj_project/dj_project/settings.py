@@ -63,7 +63,11 @@ ROOT_URLCONF = 'dj_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # 기존 : app/templates/app_name/~~.html
+            # File System Template Loader
+            os.path.join(BASE_DIR, 'dj_project','templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -27,6 +27,7 @@ def post_list(request):
 #         'post':post,
 #     })
 
+# 관례에 맞게 개발할경우, 이렇게 소스 양이 작아짐 
 post_detail = DetailView.as_view(model=Post)
 
 def archives_year(request, year):
