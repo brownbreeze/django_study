@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.http import HttpResponse, HttpRequest
-from django.views.generic import DetailView, ListView, ArchiveIndexView
+from django.views.generic import DetailView, ListView, ArchiveIndexView, YearArchiveView
 
 # view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
 # post_list = login_required(ListView.as_view(model=Post, paginate_by=10))
@@ -45,3 +45,5 @@ post_detail = DetailView.as_view(model=Post)
 
 post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at',
     paginate_by=10)
+
+post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at', make_object_list=True)
