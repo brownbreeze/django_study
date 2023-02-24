@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.http import HttpResponse, HttpRequest
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, ArchiveIndexView
 
 # view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
 # post_list = login_required(ListView.as_view(model=Post, paginate_by=10))
@@ -40,5 +40,8 @@ post_list = PostListView.as_view()
 # 관례에 맞게 개발할경우, 이렇게 소스 양이 작아짐 
 post_detail = DetailView.as_view(model=Post)
 
-def archives_year(request, year):
-    return HttpResponse(f"{year}년")
+# def archives_year(request, year):
+#     return HttpResponse(f"{year}년")
+
+post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at',
+    paginate_by=10)

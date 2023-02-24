@@ -18,5 +18,6 @@ urlpatterns = [
     path('', views.post_list, name='post_list'),
     path('<int:pk>/', views.post_detail),
     # path('archives/<int:year>/', views.archives_year),
-    path('archives/<year:year>/', views.archives_year),
+    # path('archives/<year:year>/', views.archives_year),
+    path('archive/', views.post_archive, name='post_archive')
 ]
