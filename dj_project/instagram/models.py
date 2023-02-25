@@ -2,6 +2,7 @@ from django.db import models
 #from django.contrib.auth.models import User  
 # django 는 유동적이기 때문에 위 방법은 추천하지 않음
 from django.conf import settings
+from django.urls import reverse
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -20,7 +21,10 @@ class Post(models.Model):
     def __str__(self):
         #return f'Custom Post object({self.id})'
         return self.message
-        
+    
+    def get_absolute_url(self):
+        return reverse('instagram:post_detail', args=[self.pk])
+
     class Meta:
         ordering = ['-id']
 

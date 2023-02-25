@@ -26,12 +26,12 @@ urlpatterns = [
     # path('', TemplateView.as_view(template_name='root.html'), name='root'),
     path('', RedirectView.as_view(
         #url='/instagram/'
-            pattern_name='instagram:post_list'
+            pattern_name='instagram:post_list' # 선호 사항 
         ), name='root'),
     path('admin/', admin.site.urls), # URL Reverse
     path('accounts/', include('accounts.urls')),
     path('blog1/', include('blog1.urls')),
-    path('instagram/', include('instagram.urls')),
+    path('k-instagram/', include('instagram.urls')),
 ]
 
 if settings.DEBUG:
