@@ -25,8 +25,14 @@ SECRET_KEY = '%d#z%-lv5ay#m$=dw07pl4a@m0xqf^9cek$5nwnsy=%66)pjnt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    '6a2f-14-4-231-130.jp.ngrok.io',
+    'localhost'
+]
+CSRF_TRUSTED_ORIGINS = [
+    '6a2f-14-4-231-130.jp.ngrok.io',
+    'localhost'
+]
 
 # Application definition
 
