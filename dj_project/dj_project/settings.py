@@ -26,11 +26,12 @@ SECRET_KEY = '%d#z%-lv5ay#m$=dw07pl4a@m0xqf^9cek$5nwnsy=%66)pjnt'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '6a2f-14-4-231-130.jp.ngrok.io',
-    'localhost'
+    '3fc2-14-4-231-130.jp.ngrok.io',
+    'localhost',
+    '127.0.0.1'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    '6a2f-14-4-231-130.jp.ngrok.io',
+    '3fc2-14-4-231-130.jp.ngrok.io',
     'localhost'
 ]
 
