@@ -26,12 +26,12 @@ SECRET_KEY = '%d#z%-lv5ay#m$=dw07pl4a@m0xqf^9cek$5nwnsy=%66)pjnt'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '3fc2-14-4-231-130.jp.ngrok.io',
+    '9f91-14-4-231-130.jp.ngrok.io',
     'localhost',
     '127.0.0.1'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    '3fc2-14-4-231-130.jp.ngrok.io',
+    '9f91-14-4-231-130.jp.ngrok.io',
     'localhost'
 ]
 
@@ -138,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_URL = '{host name}/static/' 이렇게 할 수도 있음 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'dj_project', 'static')
