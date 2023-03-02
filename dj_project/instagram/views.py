@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
-from django.views.generic import ArchiveIndexView, ListView, YearArchiveView
+from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArchiveView
 
 from .models import Post
 
