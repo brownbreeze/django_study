@@ -28,3 +28,8 @@ yum -y install sqlite-3.10.2-1.fc22.x86_64.rpm sqlite-devel-3.10.2-1.fc22.x86_64
 cd /home
 # git clone 해온 후 기동하기 
 ```
+
+## ngrok
+```
+ngrok http 8080
+```
