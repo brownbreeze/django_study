@@ -4,9 +4,15 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArchiveView
-
+from .forms import PostForm
 from .models import Post
 
+
+def post_new(request):
+    form = PostForm()
+    return render(request, 'instagram/post_form.html',{
+        'form':form,        
+    })
 
 # view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
 # post_list = login_required(ListView.as_view(model=Post, paginate_by=10))

@@ -1,12 +1,16 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 #from django.contrib.auth.models import User  
 # django 는 유동적이기 때문에 위 방법은 추천하지 않음
 from django.conf import settings
 from django.urls import reverse
 
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    message = models.TextField()
+    message = models.TextField(
+        validators = [MinLengthValidator(10)]
+    ) 
     # upload_to 변경 시, file 올릴 경우에 반영 
     photo = models.ImageField(blank=True, upload_to='instagram/post/%Y%m%d') 
     is_public = models.BooleanField(default=False, verbose_name='공개여부')

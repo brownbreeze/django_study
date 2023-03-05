@@ -9,6 +9,8 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ['message'] # link 설정
     search_fields = ['message'] # 검색 쉽게 가능 
     list_filter = ['created_at', 'is_public'] # 데이터베이스 창 오른쪽에 필터 정보
+    # form = PostForm
+    
 
     def photo_tag(self, post):
         if post.photo:
