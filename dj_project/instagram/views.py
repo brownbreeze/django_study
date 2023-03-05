@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArchiveView
 from .forms import PostForm
@@ -9,7 +9,14 @@ from .models import Post
 
 
 def post_new(request):
-    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostForm()
+        
     return render(request, 'instagram/post_form.html',{
         'form':form,        
     })
