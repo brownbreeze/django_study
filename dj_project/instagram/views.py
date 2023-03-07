@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
@@ -7,12 +8,17 @@ from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArc
 from .forms import PostForm
 from .models import Post
 
-
+@login_required
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid(): # 유효성 검증 
-            post = form.save() # db에 저장해줌
+            # post = form.save(commit=True) # db에 저장해줌
+            post = form.save(commit=False) # db에 저장해줌
+            post.author = request.user # 현재 로그인 user instance 인증은 아직 안함 
+            post.save()
+            # commit=False를 한다면, db에 생성이 안됨 
+            # 위 항목은 instance.save()를 지연시키고자 할 때 사용 
             return redirect(post)
     else:
         form = PostForm()
@@ -21,6 +27,28 @@ def post_new(request):
         'form':form,        
     })
 
+@login_required
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    
+    # 작성자 check tip 
+    if post.author != request.user :
+        # 장식자를 이용해서 적용 가능 
+        messages.error(request, '작성자만 수정할 수 있습니다.')
+        return redirect(post) 
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid(): # 유효성 검증 
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostForm(instance=post)
+        
+    return render(request, 'instagram/post_form.html',{
+        'form':form,        
+    })
+    
 # view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
 # post_list = login_required(ListView.as_view(model=Post, paginate_by=10))
 # 요즘방식
