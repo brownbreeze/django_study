@@ -11,8 +11,8 @@ from .models import Post
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save()
+        if form.is_valid(): # 유효성 검증 
+            post = form.save() # db에 저장해줌
             return redirect(post)
     else:
         form = PostForm()
