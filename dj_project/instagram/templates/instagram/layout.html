@@ -50,9 +50,16 @@
         </form>
       </div>
     </nav>
+
       <div class="continaer">
           <div class="row">
               <div class="col-sm-12">
+                {% for message in messages %}
+                  <div class="alert alert-success">
+                      {{ message.message }}
+                  </div>
+                {% endfor %}
+
                 {% block content %}
                 {% endblock content %}
                 <hr/>

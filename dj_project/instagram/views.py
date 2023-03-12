@@ -17,6 +17,7 @@ def post_new(request):
             post = form.save(commit=False) # db에 저장해줌
             post.author = request.user # 현재 로그인 user instance 인증은 아직 안함 
             post.save()
+            messages.success(request, '포스팅을 추가했습니다.')
             # commit=False를 한다면, db에 생성이 안됨 
             # 위 항목은 instance.save()를 지연시키고자 할 때 사용 
             return redirect(post)
@@ -41,6 +42,8 @@ def post_edit(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid(): # 유효성 검증 
             post = form.save()
+            messages.success(request, '포스팅을 수정했습니다.')
+
             return redirect(post)
     else:
         form = PostForm(instance=post)
@@ -68,6 +71,8 @@ post_list = PostListView.as_view()
 #     q = request.GET.get('q', '')
 #     if q:
 #         qs = qs.filter(message__icontains=q)
+        
+#     messages.info(request, 'message 테스트')
 #     # instagram/templates/instagram/post_list.html 를 암시
 #     return render(request, 'instagram/post_list.html',{
 #         'post_list' : qs,
