@@ -8,26 +8,6 @@ from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArc
 from .forms import PostForm 
 from .models import Post
 
-# @login_required
-# def post_new(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid(): # 유효성 검증 
-#             # post = form.save(commit=True) # db에 저장해줌
-#             post = form.save(commit=False) # db에 저장해줌
-#             post.author = request.user # 현재 로그인 user instance 인증은 아직 안함 
-#             post.save()
-#             messages.success(request, '포스팅을 추가했습니다.')
-#             # commit=False를 한다면, db에 생성이 안됨 
-#             # 위 항목은 instance.save()를 지연시키고자 할 때 사용 
-#             return redirect(post)
-#     else:
-#         form = PostForm()
-        
-#     return render(request, 'instagram/post_form.html',{
-#         'form':form,        
-#     })
-
 class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
@@ -36,7 +16,6 @@ class PostUpdateView(UpdateView):
 
 post_edit = PostUpdateView.as_view()
 
-#@login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
@@ -129,9 +108,6 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 # 관례에 맞게 개발할경우, 이렇게 소스 양이 작아짐 
 post_detail = DetailView.as_view(model=Post)
 
-
-# def archives_year(request, year):
-#     return HttpResponse(f"{year}년")
 
 post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at',
     paginate_by=10)

@@ -24,9 +24,6 @@ profile = ProfileView.as_view()
 
 @login_required
 def profile_edit(request):
-    # profile = request.user.profile
-    #위와 같은 코드
-    # #    Profile.objects.get(user=request.user)
     try :
         profile = request.user.profile
     except Profile.DoesNotExist:
