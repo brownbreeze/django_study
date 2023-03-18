@@ -27,30 +27,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 post_new = PostCreateView.as_view()
-
-# @login_required
-# def post_edit(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-    
-#     # 작성자 check tip 
-#     if post.author != request.user :
-#         # 장식자를 이용해서 적용 가능 
-#         messages.error(request, '작성자만 수정할 수 있습니다.')
-#         return redirect(post) 
-
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES, instance=post)
-#         if form.is_valid(): # 유효성 검증 
-#             post = form.save()
-#             messages.success(request, '포스팅을 수정했습니다.')
-
-#             return redirect(post)
-#     else:
-#         form = PostForm(instance=post)
-        
-#     return render(request, 'instagram/post_form.html',{
-#         'form':form,        
-#     })
     
 
 @login_required
@@ -65,38 +41,12 @@ def post_delete(request, pk):
         'post' : post,
     })
     
-# view 기준이나, 이는 function 을 더 익숙하게 한 후 사용 권장 
-# post_list = login_required(ListView.as_view(model=Post, paginate_by=10))
-# 요즘방식
-#class PostListVipew(LoginRequiredMixin, ListView):
-# dispatch 란 class 기반 뷰에서 실제 요청왔을 때, 
-# 어떤 request method function이 호출된다 하더라도 호출되는 function
 @method_decorator(login_required, name='dispatch')
 class PostListView(ListView):
     model = Post
     paginate_by = 10
 
 post_list = PostListView.as_view()
-
-# @login_required
-# def post_list(request):
-#     qs = Post.objects.all()
-#     q = request.GET.get('q', '')
-#     if q:
-#         qs = qs.filter(message__icontains=q)
-        
-#     messages.info(request, 'message 테스트')
-#     # instagram/templates/instagram/post_list.html 를 암시
-#     return render(request, 'instagram/post_list.html',{
-#         'post_list' : qs,
-#         'q' : q,
-#     })
-
-# def post_detail(request: HttpRequest, pk: int) -> HttpResponse: 
-#     post = get_object_or_404(Post, pk=pk)
-#     return render(request, 'instagram/post_detail.html',{
-#         'post':post,
-#     })
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model =Post 
