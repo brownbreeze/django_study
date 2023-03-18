@@ -3,13 +3,10 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login as auth_login
 from django.shortcuts import render 
 from accounts.forms import ProfileForm
 from accounts.models import Profile 
-
-# def profile(request):
-#     return render(request, 'accounts/profile.html')
 
 from django.views.generic import TemplateView, UpdateView, CreateView
 
@@ -19,12 +16,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 profile = ProfileView.as_view()
 
 User = get_user_model()
-
-# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Profile
-#     form_class = ProfileForm
-
-# profile_edit = ProfileUpdateView.as_view()
 
 @login_required
 def profile_edit(request):
@@ -48,12 +39,16 @@ def profile_edit(request):
         'form':form,
     })
 
-signup = CreateView.as_view(
-    model=User, 
-    form_class = UserCreationForm,
-    success_url=settings.LOGIN_URL, # 성공시 어디로 갈 것인지 
-    template_name='accounts/signup_form.html'
-)
+class SignupView(CreateView):
+    model = User
+    form_class = UserCreationForm
+    success_url = settings.LOGIN_REDIRECT_URL # 성공시 어디로 갈 것인지 
+    template_name='accounts/signup_form.html'    
+    
+    def form_valid(self, form): #로그인 인증
+        response = super().form_valid(form)
+        user = self.object 
+        auth_login(self.request, user)
+        return response
 
-def logout(request):
-    pass
+signup = SignupView.as_view()
