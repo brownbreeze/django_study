@@ -45,7 +45,7 @@ class SignupView(CreateView):
     success_url = settings.LOGIN_REDIRECT_URL # 성공시 어디로 갈 것인지 
     template_name='accounts/signup_form.html'    
     
-    def form_valid(self, form): #로그인 인증
+    def form_valid(self, form):
         response = super().form_valid(form)
         user = self.object 
         auth_login(self.request, user)
